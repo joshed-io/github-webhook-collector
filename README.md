@@ -36,13 +36,13 @@ $ foreman run rake hooks:list
 Create webhooks for all repositories you have admin access to:
 
 ``` shell
-$ foreman run rake hooks:create
+$ foreman run bundle exec rake hooks:create
 ```
 
 Remove existing webhooks to `api.keen.io`:
 
 ``` shell
-$ foreman run rake hooks:remove
+$ foreman run bundle exec rake hooks:remove
 ```
 
 ### Contributing
