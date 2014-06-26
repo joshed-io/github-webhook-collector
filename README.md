@@ -23,7 +23,7 @@ KEEN_PROJECT_ID=XXXXXXX
 KEEN_WRITE_KEY=XXXXXXXX
 ```
 
-Substitute the X's for your actual credentials. Remember not to check this file in.
+Substitute the X's for your actual credentials. (This file is in .gitignore, so it won't get checked in.)
 
 ### Usage
 
