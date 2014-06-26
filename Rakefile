@@ -5,8 +5,10 @@ require 'keen'
 
 raise "Please configure Keen!" unless Keen.project_id && Keen.write_key
 
+EVENT_COLLECTION_NAME = "webhook-fires"
+
 WEBHOOK_URL =
-  "https://api.keen.io/3.0/projects/#{Keen.project_id}/events/github-webhook-collector?api_key=#{Keen.write_key}"
+  "https://api.keen.io/3.0/projects/#{Keen.project_id}/events/#{EVENT_COLLECTION_NAME}?api_key=#{Keen.write_key}"
 
 puts "Webhook URL is: #{WEBHOOK_URL}"
 
