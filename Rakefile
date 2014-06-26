@@ -48,11 +48,15 @@ namespace :hooks do
   task :create do
     all_repos.each do |repo|
       if repo.permissions.admin
-        OCTOCLIENT.create_hook(repo.full_name, 'web', {
-          :url => WEBHOOK_URL,
-          :content_type => 'json' },
-          { :active => true, :events => '*' })
-        puts "Webhook created for #{repo[:full_name]}"
+        begin
+          OCTOCLIENT.create_hook(repo.full_name, 'web', {
+            :url => WEBHOOK_URL,
+            :content_type => 'json' },
+            { :active => true, :events => '*' })
+          puts "Webhook created for #{repo[:full_name]}"
+        rescue => e
+          puts e.message
+        end
       end
     end
   end
