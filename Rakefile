@@ -15,6 +15,7 @@ puts "Webhook URL is: #{WEBHOOK_URL}"
 Octokit.configure do |c|
   c.login = ENV['GITHUB_USERNAME']
   c.password = ENV['GITHUB_PASSWORD']
+  c.auto_paginate = true
 end
 
 OCTOCLIENT = Octokit::Client.new
@@ -25,8 +26,23 @@ def all_repos
 
   # add the repos of all the orgs you're in
   OCTOCLIENT.orgs.each do |org|
-    org.rels[:repos].get.data.each do |repo|
-      repos.push(repo)
+
+    response = org.rels[:repos].get
+
+    # get the first page of repos
+    while response
+
+      # add in all the repos
+      response.data.each do |repo|
+        repos.push(repo)
+      end
+
+      # continue if there is a next page
+      if next_page = response.rels[:next]
+        response = next_page.get
+      else
+        response = nil
+      end
     end
   end
 
